@@ -41,11 +41,20 @@ jobs:
             type=sha,format=short
             type=ref,event=branch
 
+      - name: Show target layout
+        run: |
+          ls -la target
+          find target -maxdepth 2 -type d -print
+
       - name: Build and push (Quarkus JVM)
+                - name: Show target layout
+                run: |
+                  ls -la target
+                  find target -maxdepth 2 -type d -print
         uses: docker/build-push-action@v6
         with:
           context: .                                   # repo root (has pom.xml, target/)
-          file: src/main/docker/Dockerfile.legacy-jar         # <- use one of: Dockerfile.jvm | Dockerfile.legacy-jar | Dockerfile.native
+          file: src/main/docker/Dockerfile.jvm        # <- use one of: Dockerfile.jvm | Dockerfile.legacy-jar | Dockerfile.native
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
