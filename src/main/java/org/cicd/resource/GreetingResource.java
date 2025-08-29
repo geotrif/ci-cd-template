@@ -1,4 +1,4 @@
-package org.cicd;
+package org.cicd.resource;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
